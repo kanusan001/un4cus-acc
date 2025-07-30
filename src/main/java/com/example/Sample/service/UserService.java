@@ -1,7 +1,6 @@
 package com.example.Sample.service;
-
 import com.example.Sample.repository.UserRepository;
-import com.example.Sample.user.User;
+import com.example.Sample.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,32 +9,36 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(User user) {
-        if (userRepository.existsByUsername(user.getUserName())) {
-            throw new RuntimeException("Username already exists");
-        }
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("Email already exists");
-        }
+    public UserEntity createUser(UserEntity user) {
         return userRepository.save(user);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findByStatus(User.status.ACTIVE);
+    public List<UserEntity> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(Long id) {
+    public Optional<UserEntity> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    public User updateUser(Long id, User updatedUser) {
-        User user = (User) userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        return user;
+    public UserEntity updateUser(Long id, UserEntity userDetails) {
+        UserEntity user = userRepository.findById(id).orElseThrow();
+        user.setFirstName(userDetails.getFirstName());
+        user.setLastName(userDetails.getLastName());
+        user.setUserName(userDetails.getUserName());
+        user.setEmail(userDetails.getEmail());
+        user.setPassword(userDetails.getPassword());
+        user.setRoles(userDetails.getRoles());
+        user.setStatus(userDetails.getStatus());
+        return userRepository.save(user);
+    }
+
+    public void deleteUser(Long id) {
+        UserEntity user = userRepository.findById(id).orElseThrow();
+        user.setStatus(UserEntity.status.INACTIVE);
+        userRepository.save(user);
     }
 }
-

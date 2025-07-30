@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -37,8 +37,6 @@ public class User {
     @Pattern(regexp = "^[A-Za-z]+$", message = "Last name can only contain letters")
     private String lastName;
 
-    @Getter
-    @Setter
     @NotBlank(message = "Username is required")
     @Size(min = 4, max = 20, message = "Username must be between 4 and 20 characters")
     private String userName;
@@ -59,10 +57,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private role roles;
+    
     @CreationTimestamp
     private LocalDate createdDate;
 
-    @Getter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private status status;
