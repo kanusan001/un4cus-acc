@@ -1,6 +1,6 @@
 package com.example.Sample.controller;
 import com.example.Sample.service.UserService;
-import com.example.Sample.user.UserEntity;
+import com.example.Sample.model.UserEntity;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
