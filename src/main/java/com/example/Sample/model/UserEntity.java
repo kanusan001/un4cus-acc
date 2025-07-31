@@ -16,7 +16,9 @@ import java.time.LocalDate;
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email")})
 @NoArgsConstructor
+@Data
 public class UserEntity {
+
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -49,27 +51,24 @@ public class UserEntity {
     )
     private String password;
 
+    @Setter
+    @Getter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private role roles;
 
+
     @CreationTimestamp
     private LocalDate createdDate;
 
+    @Setter
+    @Getter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private status status;
 
     public enum role{ADMIN,USER,GUEST};
     public enum status{ACTIVE,INACTIVE};
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public @NotBlank(message = "First name is required") @Size(min = 2, max = 30, message = "First name must be between 2 and 30 characters") @Pattern(regexp = "^[A-Za-z]+$", message = "First name can only contain letters") String getFirstName() {
         return firstName;
@@ -110,6 +109,7 @@ public class UserEntity {
         return password;
     }
 
+
     public void setPassword(@NotBlank(message = "Password is required") @Size(min = 8, message = "Password must be at least 8 characters") @Pattern(
             regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).+$",
             message = "Password must contain at least one uppercase letter, one number, and one special character"
@@ -123,14 +123,6 @@ public class UserEntity {
 
     public void setRoles(role roles) {
         this.roles = roles;
-    }
-
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
     }
 
     public UserEntity.status getStatus() {
