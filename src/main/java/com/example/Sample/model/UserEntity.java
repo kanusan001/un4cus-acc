@@ -51,8 +51,6 @@ public class UserEntity {
     )
     private String password;
 
-    @Setter
-    @Getter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private role roles;
@@ -61,8 +59,6 @@ public class UserEntity {
     @CreationTimestamp
     private LocalDate createdDate;
 
-    @Setter
-    @Getter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private status status;
@@ -131,5 +127,13 @@ public class UserEntity {
 
     public void setStatus(UserEntity.status status) {
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
