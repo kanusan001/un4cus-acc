@@ -1,5 +1,6 @@
 package com.example.Sample;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.*;
 
 
@@ -24,6 +25,7 @@ public class UserDTO {
     @Email
     private String email;
 
+    @JsonIgnore
     @NotBlank
     @Size(min = 8)
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")

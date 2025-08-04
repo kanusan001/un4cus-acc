@@ -70,7 +70,7 @@ public class UserService {
         userDTO.setLastName(userEntity.getLastName());
         userDTO.setUserName(userEntity.getUserName());
         userDTO.setEmail(userEntity.getEmail());
-        userDTO.setPassword(userEntity.getPassword());
+//        userDTO.setPassword(userEntity.getPassword());
         userDTO.setRole(userEntity.getRoles().name());
         userDTO.setStatus(userEntity.getStatus().name());
         return userDTO;
